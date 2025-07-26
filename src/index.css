@@ -110,6 +110,6 @@ body {
     @apply rounded-lg border bg-popover text-popover-foreground shadow-md;
   }
   .main-container {
-    @apply max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-10 sm:py-8 py-6;
+    @apply max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-3 sm:py-3 py-2;
   }
 }
