@@ -2,6 +2,7 @@ import AdminLayout from "@/_components/layout/adminLayout";
 import MainLayout from "@/_components/layout/mainLayout";
 import HomePage from "@/frontend/pages/HomePage/HomePage";
 import { createBrowserRouter } from "react-router-dom";
+import LoginPage from "@/frontend/pages/LoginPage/LoginPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +15,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
 
+  {
+    path: "/register",
+    element: <>Register Page</>,
+  },
   {
     path: "/admin",
     element: <AdminLayout />,

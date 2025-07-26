@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const MainHeader = () => {
  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -318,15 +319,11 @@ const MainHeader = () => {
                   <span>WISHLIST</span>
                 </Button>
 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="hidden md:flex items-center space-x-2 hover:bg-pink-50 hover:text-pink-600 rounded-xl px-4 py-2 transition-all duration-200"
-                  onClick={() => (window.location.href = "/login")}
-                >
+                <Link to="/login" className="hidden md:flex items-center space-x-2 hover:bg-pink-50 hover:text-pink-600 rounded-xl px-4 py-2 transition-all duration-200">
                   <User className="h-5 w-5" />
                   <span>LOGIN</span>
-                </Button>
+                </Link>
+                
 
                 <Button
                   variant="ghost"
