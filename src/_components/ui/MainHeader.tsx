@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { MegaMenuData, Page } from "./types.header";
 import {
   ChevronDown,
-  ChevronLeft,
   ChevronRight,
+  ChevronLeft,
   Heart,
   Menu,
   Search,
@@ -13,267 +12,270 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import type { MegaMenuData, Page } from "./types.header";
+import { SearchBarInput } from "@/components/ui/placeholders-and-vanish-input";
+import WishlistButton from "@/components/ui/WishlistButton";
 
 const MainHeader = () => {
- const [isDrawerOpen, setIsDrawerOpen] = useState(false);
- const [activeDrawerTab, setActiveDrawerTab] = useState<"categories" | "pages">(
-   "categories"
- );
- const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
- const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
- const [megaMenuData, setMegaMenuData] = useState<MegaMenuData | null>(null);
- const [searchQuery, setSearchQuery] = useState("");
- const [cartCount] = useState(0);
- const [showLeftArrow, setShowLeftArrow] = useState(false);
- const [showRightArrow, setShowRightArrow] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [activeDrawerTab, setActiveDrawerTab] = useState<
+    "categories" | "pages"
+  >("categories");
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [megaMenuData, setMegaMenuData] = useState<MegaMenuData | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [cartCount] = useState(0);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
 
- const megaMenuRef = useRef<HTMLDivElement>(null);
- const timeoutRef = useRef<NodeJS.Timeout | null>(null);
- const categoryScrollRef = useRef<HTMLDivElement>(null);
+  const megaMenuRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
 
- // Mock API data - replace with actual API call
- const mockMegaMenuData: MegaMenuData = useMemo(
-   () => ({
-     categories: [
-       {
-         id: "bra",
-         name: "BRA",
-         slug: "bra",
-         subcategories: [
-           {
-             id: "premium-regular",
-             name: "Premium Regular Bra",
-             slug: "premium-regular-bra",
-           },
-           { id: "regular", name: "Regular Bra", slug: "regular-bra" },
-           { id: "seamless", name: "Seamless Bra", slug: "seamless-bra" },
-           {
-             id: "stylish-lace",
-             name: "Stylish Lace Bra",
-             slug: "stylish-lace-bra",
-           },
-           { id: "padded", name: "Padded Bra", slug: "padded-bra" },
-           {
-             id: "non-padded",
-             name: "Non-Padded Bra",
-             slug: "non-padded-bra",
-           },
-           { id: "wired", name: "Wired Bra", slug: "wired-bra" },
-           { id: "pushup", name: "Pushup Bra", slug: "pushup-bra" },
-           { id: "strapless", name: "Strapless Bra", slug: "strapless-bra" },
-           { id: "bralette", name: "Bralette", slug: "bralette" },
-         ],
-       },
-       {
-         id: "panty",
-         name: "PANTY",
-         slug: "panty",
-         subcategories: [
-           { id: "panty-box", name: "Panty Box", slug: "panty-box" },
-           {
-             id: "regular-panty",
-             name: "Regular Panty",
-             slug: "regular-panty",
-           },
-           {
-             id: "stylish-lace-panty",
-             name: "Stylish Lace Panty",
-             slug: "stylish-lace-panty",
-           },
-           {
-             id: "seamless-panty",
-             name: "Seamless Panty",
-             slug: "seamless-panty",
-           },
-           {
-             id: "boxer-shortie",
-             name: "Boxer/Shortie",
-             slug: "boxer-shortie",
-           },
-           { id: "thong", name: "Thong", slug: "thong" },
-         ],
-       },
-       {
-         id: "teenage",
-         name: "TEENAGE",
-         slug: "teenage",
-         subcategories: [
-           { id: "teenage-bra", name: "Teenage Bra", slug: "teenage-bra" },
-           {
-             id: "teenage-panty",
-             name: "Teenage Panty",
-             slug: "teenage-panty",
-           },
-         ],
-       },
-       {
-         id: "sports-active",
-         name: "SPORTS/ACTIVE WEAR",
-         slug: "sports-active-wear",
-         subcategories: [
-           { id: "sports-bra", name: "Sports Bra", slug: "sports-bra" },
-           { id: "leggings", name: "Leggings", slug: "leggings" },
-         ],
-       },
-       {
-         id: "nighty",
-         name: "NIGHTY",
-         slug: "nighty",
-         subcategories: [
-           {
-             id: "regular-nighty",
-             name: "Regular Nighty",
-             slug: "regular-nighty",
-           },
-           {
-             id: "honeymoon-nighty",
-             name: "Honeymoon Nighty",
-             slug: "honeymoon-nighty",
-           },
-         ],
-       },
-       {
-         id: "bodysuits",
-         name: "BODYSUITS & BODY SHAPERS",
-         slug: "bodysuits-body-shapers",
-         subcategories: [
-           { id: "body-suits", name: "Body Suits", slug: "body-suits" },
-           { id: "body-shapers", name: "Body Shapers", slug: "body-shapers" },
-         ],
-       },
-       {
-         id: "maternity",
-         name: "MATERNITY/NEW MOM",
-         slug: "maternity-new-mom",
-         subcategories: [
-           {
-             id: "maternity-bra",
-             name: "Maternity Bra",
-             slug: "maternity-bra",
-           },
-           {
-             id: "maternity-panty",
-             name: "Maternity Panty",
-             slug: "maternity-panty",
-           },
-         ],
-       },
-     ],
-   }),
-   []
- );
+  // Mock API data - replace with actual API call
+  const mockMegaMenuData: MegaMenuData = useMemo(
+    () => ({
+      categories: [
+        {
+          id: "bra",
+          name: "BRA",
+          slug: "bra",
+          subcategories: [
+            {
+              id: "premium-regular",
+              name: "Premium Regular Bra",
+              slug: "premium-regular-bra",
+            },
+            { id: "regular", name: "Regular Bra", slug: "regular-bra" },
+            { id: "seamless", name: "Seamless Bra", slug: "seamless-bra" },
+            {
+              id: "stylish-lace",
+              name: "Stylish Lace Bra",
+              slug: "stylish-lace-bra",
+            },
+            { id: "padded", name: "Padded Bra", slug: "padded-bra" },
+            {
+              id: "non-padded",
+              name: "Non-Padded Bra",
+              slug: "non-padded-bra",
+            },
+            { id: "wired", name: "Wired Bra", slug: "wired-bra" },
+            { id: "pushup", name: "Pushup Bra", slug: "pushup-bra" },
+            { id: "strapless", name: "Strapless Bra", slug: "strapless-bra" },
+            { id: "bralette", name: "Bralette", slug: "bralette" },
+          ],
+        },
+        {
+          id: "panty",
+          name: "PANTY",
+          slug: "panty",
+          subcategories: [
+            { id: "panty-box", name: "Panty Box", slug: "panty-box" },
+            {
+              id: "regular-panty",
+              name: "Regular Panty",
+              slug: "regular-panty",
+            },
+            {
+              id: "stylish-lace-panty",
+              name: "Stylish Lace Panty",
+              slug: "stylish-lace-panty",
+            },
+            {
+              id: "seamless-panty",
+              name: "Seamless Panty",
+              slug: "seamless-panty",
+            },
+            {
+              id: "boxer-shortie",
+              name: "Boxer/Shortie",
+              slug: "boxer-shortie",
+            },
+            { id: "thong", name: "Thong", slug: "thong" },
+          ],
+        },
+        {
+          id: "teenage",
+          name: "TEENAGE",
+          slug: "teenage",
+          subcategories: [
+            { id: "teenage-bra", name: "Teenage Bra", slug: "teenage-bra" },
+            {
+              id: "teenage-panty",
+              name: "Teenage Panty",
+              slug: "teenage-panty",
+            },
+          ],
+        },
+        {
+          id: "sports-active",
+          name: "SPORTS/ACTIVE WEAR",
+          slug: "sports-active-wear",
+          subcategories: [
+            { id: "sports-bra", name: "Sports Bra", slug: "sports-bra" },
+            { id: "leggings", name: "Leggings", slug: "leggings" },
+          ],
+        },
+        {
+          id: "nighty",
+          name: "NIGHTY",
+          slug: "nighty",
+          subcategories: [
+            {
+              id: "regular-nighty",
+              name: "Regular Nighty",
+              slug: "regular-nighty",
+            },
+            {
+              id: "honeymoon-nighty",
+              name: "Honeymoon Nighty",
+              slug: "honeymoon-nighty",
+            },
+          ],
+        },
+        {
+          id: "bodysuits",
+          name: "BODYSUITS & BODY SHAPERS",
+          slug: "bodysuits-body-shapers",
+          subcategories: [
+            { id: "body-suits", name: "Body Suits", slug: "body-suits" },
+            { id: "body-shapers", name: "Body Shapers", slug: "body-shapers" },
+          ],
+        },
+        {
+          id: "maternity",
+          name: "MATERNITY/NEW MOM",
+          slug: "maternity-new-mom",
+          subcategories: [
+            {
+              id: "maternity-bra",
+              name: "Maternity Bra",
+              slug: "maternity-bra",
+            },
+            {
+              id: "maternity-panty",
+              name: "Maternity Panty",
+              slug: "maternity-panty",
+            },
+          ],
+        },
+      ],
+    }),
+    []
+  );
 
- const pages: Page[] = [
-   { id: "home", name: "Home", slug: "/" },
-   { id: "about", name: "About Us", slug: "/about" },
-   { id: "blog", name: "Blog", slug: "/blog" },
-   { id: "contact", name: "Contact", slug: "/contact" },
-   { id: "faq", name: "FAQ", slug: "/faq" },
-   { id: "privacy", name: "Privacy Policy", slug: "/privacy" },
-   { id: "terms", name: "Terms & Conditions", slug: "/terms" },
-   { id: "shipping", name: "Shipping Info", slug: "/shipping" },
-   { id: "returns", name: "Returns & Exchanges", slug: "/returns" },
- ];
+  const pages: Page[] = [
+    { id: "home", name: "Home", slug: "/" },
+    { id: "about", name: "About Us", slug: "/about" },
+    { id: "blog", name: "Blog", slug: "/blog" },
+    { id: "contact", name: "Contact", slug: "/contact" },
+    { id: "faq", name: "FAQ", slug: "/faq" },
+    { id: "privacy", name: "Privacy Policy", slug: "/privacy" },
+    { id: "terms", name: "Terms & Conditions", slug: "/terms" },
+    { id: "shipping", name: "Shipping Info", slug: "/shipping" },
+    { id: "returns", name: "Returns & Exchanges", slug: "/returns" },
+  ];
 
- // Simulate API call
- useEffect(() => {
-   const fetchMegaMenuData = async () => {
-     try {
-       setTimeout(() => {
-         setMegaMenuData(mockMegaMenuData);
-       }, 500);
-     } catch (error) {
-       console.error("Failed to fetch mega menu data:", error);
-     }
-   };
+  // Simulate API call
+  useEffect(() => {
+    const fetchMegaMenuData = async () => {
+      try {
+        setTimeout(() => {
+          setMegaMenuData(mockMegaMenuData);
+        }, 500);
+      } catch (error) {
+        console.error("Failed to fetch mega menu data:", error);
+      }
+    };
 
-   fetchMegaMenuData();
- }, [mockMegaMenuData]);
+    fetchMegaMenuData();
+  }, [mockMegaMenuData]);
 
- // Check if arrows are needed
- useEffect(() => {
-   const checkScrollArrows = () => {
-     if (categoryScrollRef.current) {
-       const { scrollLeft, scrollWidth, clientWidth } =
-         categoryScrollRef.current;
-       setShowLeftArrow(scrollLeft > 0);
-       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
-     }
-   };
+  // Check if arrows are needed
+  useEffect(() => {
+    const checkScrollArrows = () => {
+      if (categoryScrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } =
+          categoryScrollRef.current;
+        setShowLeftArrow(scrollLeft > 0);
+        setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
+      }
+    };
 
-   checkScrollArrows();
-   const scrollElement = categoryScrollRef.current;
-   if (scrollElement) {
-     scrollElement.addEventListener("scroll", checkScrollArrows);
-     window.addEventListener("resize", checkScrollArrows);
+    checkScrollArrows();
+    const scrollElement = categoryScrollRef.current;
+    if (scrollElement) {
+      scrollElement.addEventListener("scroll", checkScrollArrows);
+      window.addEventListener("resize", checkScrollArrows);
 
-     return () => {
-       scrollElement.removeEventListener("scroll", checkScrollArrows);
-       window.removeEventListener("resize", checkScrollArrows);
-     };
-   }
- }, []);
+      return () => {
+        scrollElement.removeEventListener("scroll", checkScrollArrows);
+        window.removeEventListener("resize", checkScrollArrows);
+      };
+    }
+  }, []);
 
- const scrollCategories = (direction: "left" | "right") => {
-   if (categoryScrollRef.current) {
-     const scrollAmount = 200;
-     const newScrollLeft =
-       categoryScrollRef.current.scrollLeft +
-       (direction === "right" ? scrollAmount : -scrollAmount);
-     categoryScrollRef.current.scrollTo({
-       left: newScrollLeft,
-       behavior: "smooth",
-     });
-   }
- };
+  const scrollCategories = (direction: "left" | "right") => {
+    if (categoryScrollRef.current) {
+      const scrollAmount = 200;
+      const newScrollLeft =
+        categoryScrollRef.current.scrollLeft +
+        (direction === "right" ? scrollAmount : -scrollAmount);
+      categoryScrollRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: "smooth",
+      });
+    }
+  };
 
- const handleMouseEnter = (menuId: string) => {
-   if (timeoutRef.current) {
-     clearTimeout(timeoutRef.current);
-   }
-   setActiveMegaMenu(menuId);
- };
+  const handleMouseEnter = (menuId: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setActiveMegaMenu(menuId);
+  };
 
- const handleMouseLeave = () => {
-   timeoutRef.current = setTimeout(() => {
-     setActiveMegaMenu(null);
-   }, 150);
- };
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveMegaMenu(null);
+    }, 150);
+  };
 
- const handleMegaMenuMouseEnter = () => {
-   if (timeoutRef.current) {
-     clearTimeout(timeoutRef.current);
-   }
- };
+  const handleMegaMenuMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
 
- const handleMegaMenuMouseLeave = () => {
-   setActiveMegaMenu(null);
- };
+  const handleMegaMenuMouseLeave = () => {
+    setActiveMegaMenu(null);
+  };
 
- const toggleCategoryExpansion = (categoryId: string) => {
-   setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
- };
+  const toggleCategoryExpansion = (categoryId: string) => {
+    setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+  };
 
- const mainCategories = [
-   { name: "Makeup", slug: "makeup" },
-   { name: "Skin", slug: "skin" },
-   { name: "Hair", slug: "hair" },
-   { name: "Personal care", slug: "personal-care" },
-   { name: "Mom & Baby", slug: "mom-baby" },
-   { name: "Fragrance", slug: "fragrance" },
-   { name: "UNDERGARMENTS", slug: "undergarments", hasMegaMenu: true },
-   { name: "HERBAL FEST", slug: "herbal-fest", highlight: true },
-   { name: "JEWELLERY", slug: "jewellery" },
-   { name: "CLEARANCE SALE", slug: "clearance-sale", highlight: true },
-   { name: "MEN", slug: "men" },
- ];
+  const mainCategories = [
+    { name: "Makeup", slug: "makeup" },
+    { name: "Skin", slug: "skin" },
+    { name: "Hair", slug: "hair" },
+    { name: "Personal care", slug: "personal-care" },
+    { name: "Mom & Baby", slug: "mom-baby" },
+    { name: "Fragrance", slug: "fragrance" },
+    { name: "UNDERGARMENTS", slug: "undergarments", hasMegaMenu: true },
+    { name: "HERBAL FEST", slug: "herbal-fest", highlight: true },
+    { name: "JEWELLERY", slug: "jewellery" },
+    { name: "CLEARANCE SALE", slug: "clearance-sale", highlight: true },
+    { name: "MEN", slug: "men" },
+  ];
+
   return (
     <>
       <header className="bg-white shadow-sm sticky top-0 z-50">
         {/* Top Header */}
         <div className="border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="main-container max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex-shrink-0">
@@ -294,36 +296,24 @@ const MainHeader = () => {
 
               {/* Search Bar - Premium Style */}
               <div className="flex-1 max-w-lg mx-8 hidden md:block">
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-gray-400 group-focus-within:text-pink-500 transition-colors duration-200" />
-                  </div>
-                  <Input
-                    type="text"
-                    placeholder="Search for Products, Brands..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="block w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-2xl bg-gray-50/50 focus:bg-white focus:border-pink-500 focus:ring-0 transition-all duration-200 shadow-sm hover:shadow-md placeholder-gray-500"
-                  />
-                </div>
+                <SearchBarInput
+                  placeholders={["Search for Products, Brands..."]}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
               </div>
 
+              <WishlistButton />
               {/* User Actions - Premium Style */}
               <div className="flex items-center space-x-4">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
-                  className="hidden md:flex items-center space-x-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:from-gray-700 hover:to-gray-800 border-0 rounded-xl px-4 py-2 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="hidden md:flex items-center space-x-2 bg-white text-gray-700 hover:text-pink-600 border-2 border-gray-200 hover:border-pink-300 hover:bg-pink-50 rounded-full px-6 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 font-medium"
+                  onClick={() => (window.location.href = "/login")}
                 >
-                  <Heart className="h-4 w-4" />
-                  <span>WISHLIST</span>
-                </Button>
-
-                <Link to="/login" className="hidden md:flex items-center space-x-2 hover:bg-pink-50 hover:text-pink-600 rounded-xl px-4 py-2 transition-all duration-200">
                   <User className="h-5 w-5" />
                   <span>LOGIN</span>
-                </Link>
-                
+                </Button>
 
                 <Button
                   variant="ghost"
@@ -359,7 +349,7 @@ const MainHeader = () => {
 
         {/* Category Navigation with Arrow Controls */}
         <div className="bg-white border-b border-gray-200 relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="main-container max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="hidden md:flex items-center">
               {/* Left Arrow */}
               {showLeftArrow && (
@@ -428,7 +418,7 @@ const MainHeader = () => {
             onMouseEnter={handleMegaMenuMouseEnter}
             onMouseLeave={handleMegaMenuMouseLeave}
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="main-container max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-8">
                 {megaMenuData.categories.map((category) => (
                   <div key={category.id} className="space-y-4">
