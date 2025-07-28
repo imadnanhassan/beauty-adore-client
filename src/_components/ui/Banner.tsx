@@ -125,7 +125,7 @@ export default function Banner() {
             {/* Content Overlay */}
             <div className="relative z-10 flex flex-col justify-center items-start h-full px-16 text-white ">
               <div className="transform transition-all duration-700 ease-out">
-                <h1 className="text-6xl md:text-7xl font-light tracking-wider mb-4 opacity-0 animate-[fadeInUp_0.8s_0.2s_ease-out_forwards]">
+                <h1 className="text-6xl md:text-7xl  font-light tracking-wider mb-4 opacity-0 animate-[fadeInUp_0.8s_0.2s_ease-out_forwards]">
                   {currentSlideData.title}
                 </h1>
                 <p className="text-sm tracking-[0.3em] font-light opacity-0 animate-[fadeInUp_0.8s_0.4s_ease-out_forwards]">
