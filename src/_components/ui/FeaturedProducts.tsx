@@ -28,7 +28,7 @@ export default function FeaturedProducts() {
       originalPrice: 59.99,
       rating: 4.8,
       reviews: 234,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://bk.shajgoj.com/storage/2025/03/ponds-bright-beauty-cream-imported-5.jpg",
       badge: "BESTSELLER",
     },
     {
@@ -38,7 +38,7 @@ export default function FeaturedProducts() {
       price: 24.99,
       rating: 4.6,
       reviews: 189,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://bk.shajgoj.com/storage/2025/03/ponds-bright-beauty-cream-imported-5.jpg",
       badge: "NEW",
     },
     {
@@ -49,7 +49,7 @@ export default function FeaturedProducts() {
       originalPrice: 95.99,
       rating: 4.9,
       reviews: 456,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://bk.shajgoj.com/storage/2025/03/ponds-bright-beauty-cream-imported-5.jpg",
       badge: "SALE",
     },
     {
@@ -59,7 +59,7 @@ export default function FeaturedProducts() {
       price: 32.99,
       rating: 4.7,
       reviews: 167,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://bk.shajgoj.com/storage/2025/03/ponds-bright-beauty-cream-imported-5.jpg",
     },
     {
       id: 5,
@@ -69,7 +69,7 @@ export default function FeaturedProducts() {
       originalPrice: 52.99,
       rating: 4.5,
       reviews: 298,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://bk.shajgoj.com/storage/2025/03/ponds-bright-beauty-cream-imported-5.jpg",
       badge: "TRENDING",
     },
     {
@@ -79,7 +79,7 @@ export default function FeaturedProducts() {
       price: 28.99,
       rating: 4.8,
       reviews: 203,
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://bk.shajgoj.com/storage/2025/03/ponds-bright-beauty-cream-imported-5.jpg",
     },
   ];
 
@@ -107,7 +107,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="main-container py-16 bg-gradient-to-b from-white to-pink-50/30">
+    <section className="main-container ">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">
           Featured Products
@@ -118,7 +118,7 @@ export default function FeaturedProducts() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {featuredProducts.map((product) => (
           <div
             key={product.id}
@@ -171,7 +171,7 @@ export default function FeaturedProducts() {
               </div>
 
               {/* Quick Add to Cart */}
-              <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                 <Button
                   size="sm"
                   className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-xl shadow-lg"

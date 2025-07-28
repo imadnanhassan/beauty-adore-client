@@ -1,4 +1,3 @@
-
 import { Clock, Gift, Zap, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
@@ -45,7 +44,7 @@ export default function SpecialOffers() {
       icon: Zap,
       gradient: "from-yellow-400 to-orange-500",
       textColor: "text-white",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2025%2F01%2Fcerave-3-min.png&w=1920&q=75",
     },
     {
       id: 2,
@@ -55,7 +54,7 @@ export default function SpecialOffers() {
       icon: Gift,
       gradient: "from-green-400 to-emerald-500",
       textColor: "text-white",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2025%2F01%2Fcerave-3-min.png&w=1920&q=75",
     },
     {
       id: 3,
@@ -65,12 +64,12 @@ export default function SpecialOffers() {
       icon: Tag,
       gradient: "from-purple-400 to-indigo-500",
       textColor: "text-white",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2025%2F01%2Fcerave-3-min.png&w=1920&q=75",
     },
   ];
 
   return (
-    <section className="main-container py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
+    <section className="main-container ">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">
           Special Offers
@@ -123,7 +122,7 @@ export default function SpecialOffers() {
 
           <div className="hidden lg:block">
             <img
-              src="/placeholder.svg?height=300&width=400"
+              src="https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2024%2F03%2FHome-Page-Rectangular-Simple-2_D32l.png&w=1920&q=75"
               alt="Beauty Sale"
               className="w-full h-auto rounded-2xl shadow-2xl"
             />
@@ -138,7 +137,7 @@ export default function SpecialOffers() {
           return (
             <div
               key={offer.id}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-pink-200 transform hover:scale-105"
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-pink-200 transform "
             >
               <div
                 className={`bg-gradient-to-r ${offer.gradient} p-6 relative overflow-hidden`}

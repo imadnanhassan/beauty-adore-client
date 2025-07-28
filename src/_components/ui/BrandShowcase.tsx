@@ -19,7 +19,7 @@ export default function BrandShowcase() {
     {
       id: 1,
       name: "GlowUp",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Premium skincare for radiant skin",
       productCount: 45,
       isPopular: true,
@@ -27,14 +27,14 @@ export default function BrandShowcase() {
     {
       id: 2,
       name: "VelvetLips",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Luxury lip care and color",
       productCount: 32,
     },
     {
       id: 3,
       name: "YouthGlow",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Anti-aging solutions that work",
       productCount: 28,
       isPopular: true,
@@ -42,28 +42,28 @@ export default function BrandShowcase() {
     {
       id: 4,
       name: "RadiantSkin",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Natural ingredients, visible results",
       productCount: 38,
     },
     {
       id: 5,
       name: "FlawlessBase",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Perfect coverage for every skin tone",
       productCount: 24,
     },
     {
       id: 6,
       name: "SilkyStrands",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Professional hair care at home",
       productCount: 19,
     },
     {
       id: 7,
       name: "AquaGlow",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Deep hydration for all skin types",
       productCount: 31,
       isPopular: true,
@@ -71,7 +71,7 @@ export default function BrandShowcase() {
     {
       id: 8,
       name: "ColorPop",
-      logo: "/placeholder.svg?height=80&width=120",
+      logo: "https://shop.shajgoj.com/_next/image?url=https%3A%2F%2Fbk.shajgoj.com%2Fstorage%2F2022%2F06%2F19%2Fimage_part_001.jpg&w=1920&q=75",
       description: "Bold colors, endless possibilities",
       productCount: 56,
     },
@@ -94,7 +94,7 @@ export default function BrandShowcase() {
   };
 
   return (
-    <section className="main-container py-16 bg-white">
+    <section className="main-container ">
       <div className="flex items-center justify-between mb-12">
         <div>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -126,15 +126,15 @@ export default function BrandShowcase() {
       </div>
 
       <div className="relative overflow-hidden">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-10">
           {getCurrentBrands().map((brand) => (
             <div
               key={brand.id}
-              className="group bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-pink-200 transform hover:scale-105 cursor-pointer"
+              className="group  rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform  cursor-pointer"
             >
               {/* Popular Badge */}
               {brand.isPopular && (
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute top-7 right-4 z-10">
                   <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                     POPULAR
                   </div>
