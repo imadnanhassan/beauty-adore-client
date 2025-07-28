@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import type { MegaMenuData, Page } from "./types.header";
 import { SearchBarInput } from "@/components/ui/placeholders-and-vanish-input";
 import WishlistButton from "@/components/ui/WishlistButton";
+import { Link } from "react-router-dom";
 
 const MainHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -260,11 +261,10 @@ const MainHeader = () => {
     { name: "Makeup", slug: "makeup" },
     { name: "Skin", slug: "skin" },
     { name: "Hair", slug: "hair" },
-    { name: "Personal care", slug: "personal-care" },
+    { name: "Personal care", slug: "personal-care", },
     { name: "Mom & Baby", slug: "mom-baby" },
     { name: "Fragrance", slug: "fragrance" },
     { name: "UNDERGARMENTS", slug: "undergarments", hasMegaMenu: true },
-    { name: "HERBAL FEST", slug: "herbal-fest", highlight: true },
     { name: "JEWELLERY", slug: "jewellery" },
     { name: "CLEARANCE SALE", slug: "clearance-sale", highlight: true },
     { name: "MEN", slug: "men" },
@@ -349,7 +349,7 @@ const MainHeader = () => {
 
         {/* Category Navigation with Arrow Controls */}
         <div className="bg-white border-b border-gray-200 relative">
-          <div className="main-container max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="main-container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="hidden md:flex items-center">
               {/* Left Arrow */}
               {showLeftArrow && (
@@ -378,19 +378,19 @@ const MainHeader = () => {
                     }
                     onMouseLeave={handleMouseLeave}
                   >
-                    <a
-                      href={`/${category.slug}`}
-                      className={`flex items-center px-4 py-4 text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                    <Link
+                      to={`/${category.slug}`}
+                      className={`flex items-center px-1 py-1 text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                         category.highlight
-                          ? "text-white bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl mx-1 shadow-lg hover:shadow-xl transform hover:scale-105"
-                          : "text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-pink-500 hover:bg-pink-50 rounded-t-lg"
+                          ? "text-white bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl mx-1 shadow-lg hover:shadow-xl transform "
+                          : "text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-pink-500  rounded-t-lg"
                       }`}
                     >
                       {category.name}
                       {category.hasMegaMenu && (
                         <ChevronDown className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
                       )}
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -401,7 +401,7 @@ const MainHeader = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => scrollCategories("right")}
-                  className="absolute right-2 z-10 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white rounded-full p-2 transition-all duration-200"
+                  className="absolute right-1 z-10 bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white rounded-full p-2 transition-all duration-200"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </Button>
@@ -430,7 +430,7 @@ const MainHeader = () => {
                         <li key={subcategory.id}>
                           <a
                             href={`/${category.slug}/${subcategory.slug}`}
-                            className="text-sm text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200 block py-2 px-2 rounded-lg"
+                            className="text-sm text-gray-600 hover:text-pink-600  transition-all duration-200 block py-2 px-2 rounded-lg"
                           >
                             {subcategory.name}
                           </a>
@@ -449,7 +449,7 @@ const MainHeader = () => {
                     <li>
                       <a
                         href="#"
-                        className="text-sm text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-all duration-200 block py-2 px-2 rounded-lg"
+                        className="text-sm text-gray-600 hover:text-pink-600  transition-all duration-200 block py-2 px-2 rounded-lg"
                       >
                         Regular Wear set
                       </a>
