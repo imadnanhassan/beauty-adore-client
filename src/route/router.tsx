@@ -5,6 +5,8 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "@/frontend/pages/LoginPage/LoginPage";
 import RegisterPage from "@/frontend/pages/RegisterPage/RegisterPage";
 import CartPage from "@/frontend/pages/CartPage/CartPage";
+import CheckoutPage from "@/frontend/pages/CheckoutPage/CheckoutPage";
+import OrderSuccessPage from "@/frontend/pages/OrderSuccessPage/OrderSuccessPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "checkout",
+        element: <CheckoutPage />,
+      },
+      {
+        path: "order-success",
+        element: <OrderSuccessPage />,
       },
     ],
   },
