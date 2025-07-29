@@ -7,6 +7,8 @@ import RegisterPage from "@/frontend/pages/RegisterPage/RegisterPage";
 import CartPage from "@/frontend/pages/CartPage/CartPage";
 import CheckoutPage from "@/frontend/pages/CheckoutPage/CheckoutPage";
 import OrderSuccessPage from "@/frontend/pages/OrderSuccessPage/OrderSuccessPage";
+import CustomerDashboard from "@/frontend/CustomerPage/CustomerDashboard/CustomerDashboard";
+import ShopPage from "@/frontend/pages/ShopPage/ShopPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +30,15 @@ const router = createBrowserRouter([
       {
         path: "order-success",
         element: <OrderSuccessPage />,
+      },
+      {
+        path: "shop",
+        element: <ShopPage />,
+      },
+
+      {
+        path: "dashboard",
+        element: <CustomerDashboard />,
       },
     ],
   },
